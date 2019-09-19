@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <title>Tung</title>
+        <!--  jQuery -->
+
+        <!-- Isolated Version of Bootstrap, not needed if your site already uses Bootstrap -->
+        <link rel="stylesheet" href="https://formden.com/static/cdn/bootstrap-iso.css" />
+
+        <!-- Bootstrap Date-Picker Plugin -->
+        <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js">
+        </script>
+        <link rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css" />
+
+        <script src="/socket.io/socket.io.js">
+        </script>
+
+        <script src="http://code.jquery.com/jquery-3.1.0.min.js">
+        </script>
+    </head>
+
+    <body>
+        <h1>Tung</h1>
+        <p>Welcome to Tung</p>
+
+        <div class="bootstrap-iso">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+
+                        <!-- Form code begins -->
+                        <form method="post">
+                            <div class="form-group">
+                                <!-- Date input -->
+                                <label class="control-label" for="date">Date</label>
+                                <input class="form-control" id="date" name="date" placeholder="MM/DD/YYY" type="text" />
+                            </div>
+                            <div class="form-group">
+                                <!-- Submit button -->
+                                <button class="btn btn-primary " name="submit" type="submit">Submit</button>
+                            </div>
+                        </form>
+                        <!-- Form code ends -->
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <input type="text" id="value" name="value">
+        <button id="button" class="btn btn-success">submit</button>
+        <script src="javascripts/ol.js"></script>
+        <div id="new">
+        </div>
+    </body>
+
+</html>

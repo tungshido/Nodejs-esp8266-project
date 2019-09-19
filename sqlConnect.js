@@ -1,0 +1,75 @@
+"use strict";
+var sql = require('mssql');
+const dbConfig = {
+    user: 'MP',
+    password: 'Mp@160819',
+    server: "SWVNMP22",
+    database: "IoTdata",
+    options: {
+        trustedConnection: true
+    }
+};
+module.exports = {
+    connect2SQLServer: async () => {
+        const pool = new sql.ConnectionPool(dbConfig);
+        if (await pool.connect()) {
+            console.log("database connected!!!");
+        }
+    },
+    writeData2Database: async () => {
+        const pool = new sql.ConnectionPool(dbConfig);
+        try {
+            await pool.connect();
+            const request = new sql.Request(pool);
+            //const query = "dbo.uspFindProducts 10";
+            const select = "SELECT * FROM IMmachine";
+            const result = await request.query(select);
+            return (result.recordset);
+            /*request.input('IdInut', ' sql.Decimal', '15');
+            request.execute('dbo.uspFindProducts', (err, result) => {
+                if (err) {
+                    console.log(err);
+                    console.log("Connection failed");
+                } else {
+                    console.log(result.recordset);
+                    console.log("Đã kết nối vào database");
+                    res.render("vibration-data");
+                    pool.close();
+                }
+            });*/
+        } catch (error) {
+            console.log(error);
+        }
+        pool.close();
+    }
+    //const pool = new sql.ConnectionPool(dbConfig);
+};
+/*async function writeData2Database() {
+    try {
+        const request = new sql.Request(pool);
+        //const query = "INSERT INTO machine (Id, machineName) VALUES ('" + data.message + "', '" + data.message + "')";
+        //const select = "dbo.uspFindProducts 10";
+        //const select = "SELECT * FROM IMmachine";
+        //const result = await request.query(select);
+        request.input('IdInput', sql.Decimal, '15');
+        request.execute('dbo.uspFindProducts', (err, result) => {
+            if (err) {
+                console.log(err);
+                console.log("Connection failed");
+            } else {
+                console.log(result.recordset);
+                console.log("Đã kết nối vào database");
+                res.render("vibration-data");
+                await pool.close();
+            }
+        });
+    } catch (error) {
+        console.log(error);
+        console.log("kết nối vào database không thành công");
+        return error;
+    } finally {
+        console.log("Đã ngắt kết nối!!!");
+
+    }
+}
+*/
