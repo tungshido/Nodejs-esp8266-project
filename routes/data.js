@@ -6,19 +6,17 @@ router.get('/', function (req, res) {
     res.render('data');
 });
 router.post('/', function (req, res) {
-    //console.log(req.body);
     if (req.body) {
         try {
-            res.contentType('application/json');
-            res.setHeader("Access-Control-Allow-Origin", "*");
-            const a = sqlConnection.writeData2Database().then(function(data) {
-                console.log(data[1]);
+            sqlConnection.writeData2Database().then(function (data) {
+                res.send(JSON.stringify({
+                    data
+                }));
             });
-            //console.log(data);
         } catch (error) {
             console.log(error);
         }
     }
-    return res.send('Post success');
+    return;
 });
 module.exports = router;
