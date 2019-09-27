@@ -7,17 +7,20 @@ var socketApi = {};
 socketApi.io = io;
 /*===================socketIO====================*/
 
-io.on('connection', function(socket) {
-    console.log(socket.id + 'esp8266 connected!!!');
-    socket.on('atime', function(data) {
-        console.log(data);
-    });
-    socket.emit('message', {
-        text: 'text',
+io.on('connection', socket => {
+    socket.on('cycleTimeData', cycleData => {
+        sqlFunction.writeData2Database(cycleData).then(
+            socket.emit('cycleDataStatus', {
+                status: 'received',
+            }),
+            socket.emit('cycleDataStatus', {
+                status: 'failed',
+            }),
+        );
     });
 });
 
-io.on('error', function() {
+io.on('error', () => {
     console.log('errr');
 });
 
