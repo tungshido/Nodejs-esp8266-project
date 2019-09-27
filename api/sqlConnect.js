@@ -1,10 +1,10 @@
 'use strict';
-var sql = require('mssql');
+const sql = require('mssql');
 const dbConfig = {
-    user: 'MP',
-    password: 'Mp@160819',
-    server: 'SWVNMP22',
-    database: 'IoTdata',
+    user: process.env.DB_USER,
+    password: process.env.DB_PASS,
+    server: process.env.SWVNMP22,
+    database: process.env.DB_DB,
     options: {
         trustedConnection: true,
     },

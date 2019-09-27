@@ -1,17 +1,17 @@
-var createError = require('http-errors');
-var express = require('express');
-var path = require('path');
-var cookieParser = require('cookie-parser');
-var logger = require('morgan');
-var sql = require('mssql');
-var ip = require('ip');
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
-var getDataRouter = require('./routes/data');
+const createError = require('http-errors');
+const express = require('express');
+const path = require('path');
+const cookieParser = require('cookie-parser');
+const logger = require('morgan');
+const sql = require('mssql');
+const ip = require('ip');
+const indexRouter = require('./routes/index');
+const usersRouter = require('./routes/users');
+const getDataRouter = require('./routes/data');
 
-var request = require('request');
-var bodyParser = require('body-parser');
-var app = express();
+const request = require('request');
+const bodyParser = require('body-parser');
+const app = express();
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -41,21 +41,21 @@ app.use('/users', usersRouter);
 app.use('/data', getDataRouter);
 
 //=================Database connection===============//
-sqlConnection = require('./api/sqlConnect.js');
+//const sqlConnection = require('./api/sqlConnect.js');
 
 // catch 404 and forward to error handler
-app.use(function(req, res, next) {
+app.use((req, res, next) => {
     next(createError(404));
 });
-app.post(function(req, res, next) {
+app.post((req, res, next) => {
     console.log(req.body.user.name);
 });
-app.get(function(req, res, next) {
+app.get((req, res, next) => {
     next();
 });
 
 // error handler
-app.use(function(err, req, res, next) {
+app.use((err, req, res, next) => {
     // set locals, only providing error in development
     res.locals.message = err.message;
     res.locals.error = req.app.get('env') === 'development' ? err : {};
