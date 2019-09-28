@@ -1,19 +1,19 @@
-"use strict";
-var sql = require('mssql');
+'use strict';
+const sql = require('mssql');
 const dbConfig = {
-    user: 'MP',
-    password: 'Mp@160819',
-    server: "SWVNMP22",
-    database: "IoTdata",
+    user: process.env.DB_USER,
+    password: process.env.DB_PASS,
+    server: process.env.SWVNMP22,
+    database: process.env.DB_DB,
     options: {
-        trustedConnection: true
-    }
+        trustedConnection: true,
+    },
 };
 module.exports = {
     connect2SQLServer: async () => {
         const pool = new sql.ConnectionPool(dbConfig);
         if (await pool.connect()) {
-            console.log("database connected!!!");
+            console.log('database connected!!!');
         }
     },
     writeData2Database: async () => {
@@ -22,9 +22,9 @@ module.exports = {
             await pool.connect();
             const request = new sql.Request(pool);
             //const query = "dbo.uspFindProducts 10";
-            const select = "SELECT * FROM IMmachine";
+            const select = 'SELECT * FROM IMmachine';
             const result = await request.query(select);
-            return (result.recordset);
+            return result.recordset;
             /*request.input('IdInut', ' sql.Decimal', '15');
             request.execute('dbo.uspFindProducts', (err, result) => {
                 if (err) {
@@ -39,10 +39,11 @@ module.exports = {
             });*/
         } catch (error) {
             console.log(error);
+            return error;
+        } finally {
+            pool.close();
         }
-        pool.close();
-    }
-    //const pool = new sql.ConnectionPool(dbConfig);
+    },
 };
 /*async function writeData2Database() {
     try {

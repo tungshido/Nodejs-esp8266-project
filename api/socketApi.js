@@ -1,23 +1,28 @@
 'use strict';
-var socket_io = require('socket.io');
-var sqlFunction = require('./sqlConnect.js');
-var io = socket_io();
-var socketApi = {};
+const socket_io = require('socket.io');
+//const sqlFunction = require('./sqlConnect.js');
+const io = socket_io();
+const socketApi = {};
 
 socketApi.io = io;
 /*===================socketIO====================*/
 
-io.on('connection', function(socket) {
-    console.log(socket.id + 'esp8266 connected!!!');
-    socket.on('atime', function(data) {
-        console.log(data);
-    });
-    socket.emit('message', {
-        text: 'text',
+io.on('connection', socket => {
+    console.log(`connected ${socket.id}`);
+    socket.on('atime', cycleData => {
+        console.log(cycleData);
+        /* sqlFunction.writeData2Database(cycleData).then(
+            socket.emit('cycleDataStatus', {
+                status: 'received',
+            }),
+            socket.emit('cycleDataStatus', {
+                status: 'failed',
+            }),
+        ); */
     });
 });
 
-io.on('error', function() {
+io.on('error', () => {
     console.log('errr');
 });
 
