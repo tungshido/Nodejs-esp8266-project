@@ -8,6 +8,7 @@ const ip = require('ip');
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
 const getDataRouter = require('./routes/data');
+require('dotenv').config();
 
 const request = require('request');
 const bodyParser = require('body-parser');

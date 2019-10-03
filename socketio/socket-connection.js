@@ -1,6 +1,6 @@
 'use strict';
 const socket_io = require('socket.io');
-const sqlFunction = require('../sql/sqlConnect');
+const sqlFunction = require('../sql/cycleTime-insert');
 const io = socket_io();
 const socketApi = {};
 
